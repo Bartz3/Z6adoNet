@@ -1,0 +1,21 @@
+﻿@page
+@model Zadanie6.Pages.DetailsModel
+@{
+	 ViewData["Title"] = "Dodaj do koszyka";
+}
+<h1>Dodawanie produktu do koszyka
+</h1>
+<div class="container">
+	<form class="form-horizontal" method="post">
+		<input hidden asp-for="detailsProduct.id" />
+		<div>Szczegółowe informacje: @Model.detailsProduct.description</div>
+		<br />
+		<div>Dodać produkt to koszyka?</div>
+		<br />
+		<div class="form-group"> 
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-primary"> Dodaj do koszyka </button>
+			</div>
+		</div>
+	</form>
+</div>

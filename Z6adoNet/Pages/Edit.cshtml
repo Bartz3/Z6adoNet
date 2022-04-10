@@ -1,0 +1,37 @@
+﻿@page
+@model Zadanie6.Pages.EditModel
+@{
+	ViewData["Title"] = "Edytuj";
+}
+<h2>Edytuj produkt @Model.editProduct.name ID: @Model.editProduct.id </h2>
+<br />
+<br />
+<div class="container">
+	<form class="form-horizontal" method="post">
+		<input hidden asp-for="editProduct.id" />
+		<div class="form-group">
+			<label asp-for="editProduct.name" class="control-label col-sm2"></label>
+			<div class="col-sm-6">
+				<input asp-for="editProduct.name" class="form-control"> </div>
+				<span asp-validation-for="editProduct.name" class="text-danger"></span> 
+		</div>
+		<div class="form-group">
+			<label asp-for="editProduct.price" class="control-label col-sm2"></label>
+			<div class="col-sm-6">
+				<input asp-for="editProduct.price" class="form-control"> </div>
+				<span asp-validation-for="editProduct.price" class="text-danger"></span>
+		</div>
+		<br />
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-primary">Zatwierdź</button>
+			</div>
+		</div>
+		<br />
+		<!--<div class="form-group"> 
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-primary" asp-page="List"> Wróć do listy </button>
+			</div>
+		</div> -->
+	</form>
+</div>

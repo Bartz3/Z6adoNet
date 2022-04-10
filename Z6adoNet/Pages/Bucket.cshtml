@@ -1,0 +1,33 @@
+﻿@page
+@model Zadanie6.Pages.BucketModel
+@{
+    ViewData["Title"] = "Koszyk";
+}
+<h1>Koszyk
+</h1>
+<div class="container">
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">@Html.DisplayNameFor(model => Model.bucketList[0].id)  </th>
+			<th scope="col">@Html.DisplayNameFor(model => Model.bucketList[0].name)</th>
+			<th scope="col">@Html.DisplayNameFor(model => Model.bucketList[0].price)</th>
+		</tr>
+	</thead>
+		<tbody> @foreach (var p in Model.bucketList) {
+		<tr>
+			<th scope="row">@Html.DisplayFor(m => p.id) @Html.HiddenFor(m => m.product.id) </th>
+			<td>@Html.DisplayFor(m => p.name) @Html.HiddenFor(m => m.product.name) </td>
+			<td>@Html.DisplayFor(m => p.price) @Html.HiddenFor(m => m.product.price) </td>
+			
+		</tr> }
+	</tbody>
+</table>
+	<form class="form-horizontal" method="post">
+		<div class="form-group"> 
+			<div class="row col-sm-12"> <input type="submit" class="btn btn-primary" value="Usuń zawartość koszyka" /> </div>
+			<br />
+			<div class="row col-sm-12"> <a asp-page="List" class=" btn btn-primary ">Wróć do listy</a> </div>
+		</div>      
+	</form>
+</div>
