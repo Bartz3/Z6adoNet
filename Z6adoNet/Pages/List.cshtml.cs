@@ -11,12 +11,12 @@ namespace Zadanie6.Pages
     public class ListModel : PageModel
     {
 
-        private readonly ILogger<ListModel> _logger;
 
         public List<Product> productList = new List<Product>();
 
         public Product product { get; set; }
         public IConfiguration _configuration { get; }
+        private readonly ILogger<ListModel> _logger;
         public ListModel(IConfiguration configuration, ILogger<ListModel> logger)
         {
             _logger = logger;
@@ -31,8 +31,8 @@ namespace Zadanie6.Pages
             SqlCommand cmd = new SqlCommand(sql, con);
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
+
             Product _product;
-            int i = 0;
             while (reader.Read())
             {
                 _product = new Product();

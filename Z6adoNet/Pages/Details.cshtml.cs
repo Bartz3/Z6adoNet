@@ -12,5 +12,17 @@ namespace Zadanie6.Pages
         {
             detailsProduct.id = id;
         }
+        public IActionResult OnPost(int id)
+        {
+            var cookie = Request.Cookies["ciastkowyProdukt"];
+            if (cookie == null)
+            {
+                cookie = String.Empty;
+            }
+            cookie += "," + id.ToString();
+            Response.Cookies.Append("ciastkowyProdukt", cookie);
+
+            return RedirectToPage("Bucket");
+        }
     }
 }
