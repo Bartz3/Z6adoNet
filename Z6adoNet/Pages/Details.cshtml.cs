@@ -21,7 +21,7 @@ namespace Zadanie6.Pages
             }
             cookie += "," + id.ToString();
             Response.Cookies.Append("ciastkowyProdukt", cookie);
-
+            //Response.Cookies.Delete("ciastkowyProdukt");
             return RedirectToPage("Bucket");
         }
     }

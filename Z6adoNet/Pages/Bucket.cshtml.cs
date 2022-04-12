@@ -38,7 +38,7 @@ namespace Zadanie6.Pages
                 string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
 
                 SqlConnection con = new SqlConnection(myCompanyDBcs);
-                string sql = "SELECT name FROM Product where Id=" + id.ToString();
+                string sql = "SELECT name FROM Product where Id=" + id.ToString()+"AND Id IS NOT NULL";
                 SqlCommand cmd = new SqlCommand(sql, con);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -46,16 +46,21 @@ namespace Zadanie6.Pages
                 Product _product;
                 while (reader.Read())
                 {
-                    _product = new Product();
-                    _product.id = int.Parse(reader["Id"].ToString());
-                    _product.name = reader["Name"].ToString();
-                    if (_product.description != null)
-                    {
-                        _product.description = reader["Description"].ToString();
-                    }
-                    _product.price = Decimal.Parse(reader["Price"].ToString());
+                    //if (int.Parse(reader["Id"].ToString()) != null)
+                    //{
+                        _product = new Product();
+                        _product.id = int.Parse(reader["Id"].ToString());
+                        _product.name = reader["Name"].ToString();
+                        if (_product.description != null)
+                        {
+                            _product.description = reader["Description"].ToString();
+                        }
+                        _product.price = Decimal.Parse(reader["Price"].ToString());
 
-                    bucketList.Add(_product);
+                        bucketList.Add(_product);
+
+                 //   }
+                   // else continue;
                 }
                 reader.Close(); con.Close();
 
