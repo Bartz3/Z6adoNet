@@ -25,50 +25,53 @@ namespace Zadanie6.Pages
             {
                 return;
             }
-            string[] IDs = cookie.Split(',');
-            int pom;
-            Product produkt;
+            string[] IDs = cookie.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+            int idOut;
+            int[]newIds=new int[IDs.Length];
+            for (int i = 0; i < IDs.Length; i++)
+            {
+                newIds[i] = 0;
+            }
+            int c = 0;
+
+
+            string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
+
+            SqlConnection con = new SqlConnection(myCompanyDBcs);
+
+
             foreach (var id in IDs) // Dodawanie wszystkich produktów z ciastka do koszyka
             {
-                bool bool2 = int.TryParse(id, out pom);
+                bool bool2 = int.TryParse(id, out idOut);
                 if (!bool2)
                     continue;
-                
-                // Tutaj
-                string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
-
-                SqlConnection con = new SqlConnection(myCompanyDBcs);
-                string sql = "SELECT name FROM Product where Id=" + id.ToString()+"AND Id IS NOT NULL";
+                string sql = "SELECT name FROM Product where Id= @Id AND Id IS NOT NULL";
                 SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@Id", idOut);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 Product _product;
                 while (reader.Read())
                 {
-                    //if (int.Parse(reader["Id"].ToString()) != null)
-                    //{
-                        _product = new Product();
-                        _product.id = int.Parse(reader["Id"].ToString());
-                        _product.name = reader["Name"].ToString();
-                        if (_product.description != null)
-                        {
-                            _product.description = reader["Description"].ToString();
-                        }
-                        _product.price = Decimal.Parse(reader["Price"].ToString());
+                    _product = new Product();
+                    _product.id = int.Parse(reader["Id"].ToString());
+                    _product.name = reader["Name"].ToString();
+                    if (_product.description != null)
+                    {
+                        _product.description = reader["Description"].ToString();
+                    }
+                    _product.price = Decimal.Parse(reader["Price"].ToString());
 
-                        bucketList.Add(_product);
+                    bucketList.Add(_product);
 
-                 //   }
-                   // else continue;
+                    reader.Close(); con.Close();
                 }
-                reader.Close(); con.Close();
-
-                //Tutaj
+                //newIds[c] = idOut;
             }
-
+   
         }
-
         public IActionResult OnPost()
         {
             Response.Cookies.Delete("ciastkowyProdukt");

@@ -5,6 +5,7 @@
 }
 <h2>Lista produktów</h2>
 @*<form method="post">*@
+
 <div> <a asp-page="Create" class="btn btn-primary ">Dodaj</a> </div>
 <br />
 <br />
@@ -22,6 +23,11 @@
 			<th scope="row">@Html.DisplayFor(m => p.id) @Html.HiddenFor(m => m.product.id) </th>
 			<td>@Html.DisplayFor(m => p.name) @Html.HiddenFor(m => m.product.name) </td>
 			<td>@Html.DisplayFor(m => p.price) @Html.HiddenFor(m => m.product.price) </td>
+@*			@{ var d = new Dictionary<string, string>
+			 {
+			    { "id", "@p.id" },
+			    { "name", "@p.name" }
+			 };}*@
 			<td> <a asp-page="Details" asp-route-id=@p.id >Szczegóły</a> | <a asp-page="Edit" asp-route-id=@p.id> Edytuj</a> | <a asp-page="Delete" asp-route-id=@p.id>Kasuj</a> | </td>
 		</tr> }
 	</tbody>

@@ -24,9 +24,9 @@ namespace Zadanie6.Pages
             string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
 
             SqlConnection con = new SqlConnection(myCompanyDBcs);
-            string sql = "DELETE FROM Product WHERE Id ="+id.ToString();
-        
+            string sql = "DELETE FROM Product WHERE Id = @Id";
             SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@Id", id);
             try
             {
                 con.Open();

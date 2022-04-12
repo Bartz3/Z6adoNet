@@ -27,9 +27,12 @@ namespace Zadanie6.Pages
             string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
             SqlConnection con = new SqlConnection(myCompanyDBcs);
             //string sql = "INSERT INTO Product VALUES(5,'"+p.name+"','"+ p.price.ToString()+"')";
-            string sql = "INSERT INTO Product (name,price) VALUES('"+p.name+"','"+ p.price.ToString()+"')";
+            // string sql = "INSERT INTO Product (name,price) VALUES('"+p.name+"','"+ p.price.ToString()+"')";
+            string sql = "INSERT INTO Product (name,price) VALUES(@name,@price)";
 
             SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@name", p.name);
+            cmd.Parameters.AddWithValue("@price", p.price);
             try
             {
                 con.Open();

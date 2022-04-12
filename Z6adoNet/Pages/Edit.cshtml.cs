@@ -11,6 +11,7 @@ namespace Zadanie6.Pages
         public void OnGet(int id)
         {
             editProduct.id  = id;
+            //editProduct.name = _name;
         }
         public IConfiguration _configuration { get; }
         private readonly ILogger<EditModel> _logger;
@@ -26,9 +27,12 @@ namespace Zadanie6.Pages
             p.price = editProduct.price;
             string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
             SqlConnection con = new SqlConnection(myCompanyDBcs);
-            string sql = "UPDATE Product SET price=" + p.price +",name='"+p.name+ "' WHERE Id=" + p.id.ToString();
-
+            //string sql = "UPDATE Product SET price=" + p.price +",name='"+p.name+ "' WHERE Id=" + p.id.ToString();
+            string sql = "UPDATE Product SET price= @price, name=@name WHERE Id=@Id";
             SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@name", p.name);
+            cmd.Parameters.AddWithValue("@price", p.price);
+            cmd.Parameters.AddWithValue("@Id", p.id);
             try
             {
                 con.Open();
