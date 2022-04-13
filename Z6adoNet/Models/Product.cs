@@ -10,7 +10,7 @@ namespace Zadanie6.Models
         [Required(ErrorMessage = "Pole Nazwa jest obowiązkowe!"), Display(Name = "Nazwa")]
         public string name { get; set; }
         [Required(ErrorMessage = "Pole Cena jest obowiązkowe!"), Display(Name = "Cena"),
-            Range(0, double.MaxValue, ErrorMessage = "Podano niepoprawną cene."), DataType(DataType.Currency, ErrorMessage = "Podana wartość jest złahaha")]
+            Range(0, double.MaxValue, ErrorMessage = "Podano niepoprawną cene."), DataType(DataType.Currency, ErrorMessage = "Podana wartość jest zła")]
         public decimal price { get; set; }
         public string? description { get; set; }
         public static List<Product> GetProducts()

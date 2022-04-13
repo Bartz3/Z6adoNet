@@ -4,7 +4,7 @@ using Zadanie6.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Text;
-using Z6adoNet.Pages;
+
 
 namespace Zadanie6.Pages
 {
