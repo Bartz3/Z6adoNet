@@ -38,6 +38,9 @@ namespace Zadanie6.Pages
                 newIds[i] = 0;
             }
             int c = 0;
+
+            string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
+            SqlConnection con = new SqlConnection(myCompanyDBcs);
             foreach (var id in IDs) // Dodawanie wszystkich produktów z ciastka do koszyka
             {
                 bool bool2 = int.TryParse(id, out idOut);
@@ -48,35 +51,33 @@ namespace Zadanie6.Pages
             }
             for (int i = 0; i < newIds.Length; i++)
             {
+                string sql = "SELECT * FROM Product WHERE Id= @Id";
+                SqlCommand cmd = new SqlCommand(sql, con);
 
-            string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
-            SqlConnection con = new SqlConnection(myCompanyDBcs);
+                cmd.Parameters.AddWithValue("@Id",newIds[i].ToString());
 
-            string sql = "SELECT * FROM Product WHERE Id="+newIds[c-1].ToString();
-            SqlCommand cmd = new SqlCommand(sql, con);
+                Product _product;
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
 
-            //cmd.Parameters.AddWithValue("@Id",newIds[c-1]);
 
-           Product _product;
-            con.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-
-                
-            while (reader.Read())
-            {
-                _product = new Product();
-                _product.id = int.Parse(reader["Id"].ToString());
-                _product.name = reader["Name"].ToString();
-                if (_product.description != null)
+                while (reader.Read())
                 {
-                    _product.description = reader["Description"].ToString();
-                }
-                _product.price = Decimal.Parse(reader["Price"].ToString());
+                    _product = new Product();
+                    _product.id = int.Parse(reader["Id"].ToString());
+                    _product.name = reader["Name"].ToString();
+                    if (_product.description != null)
+                    {
+                        _product.description = reader["Description"].ToString();
+                    }
+                    _product.price = Decimal.Parse(reader["Price"].ToString());
 
-                bucketList.Add(_product);
+                    bucketList.Add(_product);
+                }
+                reader.Close(); con.Close();
             }
-            reader.Close(); con.Close();
-            }
+           
+            
 
         }
         //public void OnGet()
