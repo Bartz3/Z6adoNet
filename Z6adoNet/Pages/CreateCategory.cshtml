@@ -1,0 +1,32 @@
+﻿@page
+@model Zadanie6.Pages.CreateCategoryModel
+@{
+	ViewData["Title"] = "Nowa kategoria";
+}
+
+<h2>Nowy produkt</h2>
+<br />
+<br />
+<div class="container">
+	<form class="form-horizontal" method="post">
+		<div class="form-group">
+			<label asp-for="category.shortName" class="control-label col-sm2"></label>
+				
+			<div class="col-sm-6">
+				<input asp-for="category.shortName" class="form-control"> </div>
+				<span asp-validation-for="category.shortName" class="text-danger"></span> 
+		</div>
+		<div class="form-group">
+			<label asp-for="category.longName" class="control-label col-sm2"></label>
+			<div class="col-sm-6">
+				<input asp-for="category.longName" class="form-control"> </div>
+				<span asp-validation-for="category.longName" class="text-danger"></span>
+		</div>
+		<br />
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button class="btn btn-primary">Zatwierdź</button>
+			</div>
+		</div>
+	</form>
+</div>

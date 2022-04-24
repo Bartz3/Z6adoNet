@@ -4,7 +4,7 @@ using Zadanie6.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Text;
-
+using System.Data;
 
 namespace Zadanie6.Pages
 {
@@ -27,8 +27,9 @@ namespace Zadanie6.Pages
             string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
 
             SqlConnection con = new SqlConnection(myCompanyDBcs);
-            string sql = "SELECT * FROM Product"; 
-            SqlCommand cmd = new SqlCommand(sql, con);
+            SqlCommand cmd = new SqlCommand("sp_productDisplay", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 

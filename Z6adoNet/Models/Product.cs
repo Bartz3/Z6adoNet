@@ -13,6 +13,9 @@ namespace Zadanie6.Models
             Range(0, double.MaxValue, ErrorMessage = "Podano niepoprawną cene."), DataType(DataType.Currency, ErrorMessage = "Podana wartość jest zła")]
         public decimal price { get; set; }
         public string? description { get; set; }
+
+        [Display(Name = "CategoryID")]
+        public int CategoryID { get; set; }
         public static List<Product> GetProducts()
         {
             Product pilka = new Product { id = 1, name = "Piłka nożna", price = 25.30M, description = "Czerwona piłka" };
