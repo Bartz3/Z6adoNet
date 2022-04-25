@@ -14,6 +14,7 @@
 		<tr>
 			<th scope="col">@Html.DisplayNameFor(model => Model.productList[2].id)  </th>
 			<th scope="col">@Html.DisplayNameFor(model => Model.productList[2].name)</th>
+			<th scope="col">Kategoria</th>
 			<th scope="col">@Html.DisplayNameFor(model => Model.productList[2].price)</th>
 			<th scope="col">Akcja</th>
 		</tr>
@@ -22,6 +23,7 @@
 		<tr>
 			<th scope="row">@Html.DisplayFor(m => p.id) @Html.HiddenFor(m => m.product.id) </th>
 			<td>@Html.DisplayFor(m => p.name) @Html.HiddenFor(m => m.product.name) </td>
+			<td>@Html.DisplayFor(m => p.CategoryID) @Html.HiddenFor(m => m.product.CategoryID) </td>
 			<td>@Html.DisplayFor(m => p.price) @Html.HiddenFor(m => m.product.price) </td>
 @*			@{ var d = new Dictionary<string, string>
 			 {
@@ -33,10 +35,11 @@
 	</tbody>
 </table>
 <br />
-		<div class="form-group"> 
-			<div > <a asp-page="Bucket" class=" btn btn-primary ">Koszyk</a> </div>
-			<br />
-			<div > <a asp-page="CreateCategory" class=" btn btn-primary ">Stwórz kategorie</a> </div>
-			</div>
+
+<div class="container" style="display: flex; height: 100px;" > 
+	<div style="width: 12%" > <a asp-page="Bucket" class=" btn btn-primary ">Koszyk</a> </div>
+	<div style="width: 12%"  > <a asp-page="CreateCategory" class=" btn btn-primary ">Stwórz kategorie</a> </div>
+	<div style="width: 12%" > <a asp-page="CategoryList" class=" btn btn-primary ">Lista kategori</a> </div>
+</div>
 
 

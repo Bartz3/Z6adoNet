@@ -22,6 +22,15 @@
 				<span asp-validation-for="newProduct.price" class="text-danger"></span>
 		</div>
 		<br />
+		Kategoria
+		<select asp-for="category.id">
+			<option value="">-</option>
+			@foreach(var cat in Model.categoryList)
+			{
+				<option value="@cat.id">@cat.shortName</option>
+			}		
+		</select>
+		<br /><br />
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button class="btn btn-primary">Zatwierdź</button>

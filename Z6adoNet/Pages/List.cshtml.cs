@@ -39,6 +39,8 @@ namespace Zadanie6.Pages
                 _product = new Product();
                 _product.id = int.Parse(reader["Id"].ToString());
                 _product.name = reader["Name"].ToString();
+                _product.CategoryID= int.Parse(reader["CategoryID"].ToString());
+
                 if (_product.description != null) 
                 {
                       _product.description = reader["Description"].ToString();

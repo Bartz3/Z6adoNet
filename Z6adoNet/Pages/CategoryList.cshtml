@@ -1,0 +1,37 @@
+﻿@page
+@model Zadanie6.Pages.CategoryListModel
+@{
+    ViewData["Title"] = "Lista kategori";
+}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">@Html.DisplayNameFor(model => Model.categoryList[2].id)  </th>
+			<th scope="col">@Html.DisplayNameFor(model => Model.categoryList[2].shortName)</th>
+			<th scope="col">@Html.DisplayNameFor(model => Model.categoryList[2].longName)</th>
+			<th scope="col">Usuń</th>
+			<th scope="col">Edytuj</th>
+		</tr>
+	</thead>
+	<tbody> @foreach (var p in Model.categoryList) {
+		<tr>
+			<th scope="row">@Html.DisplayFor(m => p.id) @Html.HiddenFor(m => m.category.id) </th>
+			<td>@Html.DisplayFor(m => p.shortName) @Html.HiddenFor(m => m.category.shortName) </td>
+			<td>@Html.DisplayFor(m => p.longName) @Html.HiddenFor(m => m.category.longName) </td>
+			<td><a asp-page="DeleteCategory" asp-route-id=@p.id >Usuń kategorię @p.id</a></td>
+			<td><a asp-page="EditCategory" asp-route-id=@p.id >Edytuj kategorię @p.id</a></td>
+@*			@{ var d = new Dictionary<string, string>
+			 {
+			    { "id", "@p.id" },
+			    { "name", "@p.name" }
+			 };}*@
+		</tr> }
+	</tbody>
+</table>
+<div class="form-group" > 
+	<div > <a asp-page="CreateCategory" class=" btn btn-primary ">Dodaj kategorię</a> </div>
+</div>
+<br />
+<div class="form-group" > 
+	<div > <a asp-page="List" class=" btn btn-primary ">Lista zakupów</a> </div>
+</div>

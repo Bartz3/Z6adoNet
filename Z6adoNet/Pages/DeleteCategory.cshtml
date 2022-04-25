@@ -1,13 +1,13 @@
 ﻿@page
-@model Zadanie6.Pages.DeleteModel
+@model Zadanie6.Pages.DeleteCategoryModel
 @{
-	ViewData["Title"] = "Usuń produkt";
+	ViewData["Title"] = "Usuń kategorię";
 }
-<h2>Usuwanie produktu @Model.deleteProduct.name ID: @Model.deleteProduct.id 
+<h2>Usuwanie produktu ID: @Model.deleteCategory.id 
 </h2>
 <div class="container">
 	<form class="form-horizontal" method="post">
-		<input hidden asp-for="deleteProduct.id" />
+		<input hidden asp-for="deleteCategory.id" />
 		<div>Czy napewno chcesz usunąć ten produkt?</div>
 		<br />
 		<div class="form-group">

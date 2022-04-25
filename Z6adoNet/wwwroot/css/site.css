@@ -16,3 +16,43 @@ html {
 body {
   margin-bottom: 60px;
 }
+.form-group {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+    .form-group label {
+        margin: 5px 50px 5px 0;
+    }
+
+    .form-group input {
+        vertical-align: middle;
+        margin: 5px 10px 5px 0;
+        padding: 10px; 
+        border: 1px solid #ddd;
+    }
+
+
+    .form-group button {
+        padding: 10px 20px;
+        background-color: dodgerblue;
+        border: 1px solid #ddd;
+        color: white;
+        cursor: pointer;
+    }
+
+    .form-group button:hover {
+        background-color: green;
+    }
+
+@media (max-width: 800px) {
+    .form-group input {
+        margin: 100px 100px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
