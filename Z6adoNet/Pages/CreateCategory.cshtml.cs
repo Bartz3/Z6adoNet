@@ -50,7 +50,7 @@ namespace Zadanie6.Pages
             int numAff = cmd.ExecuteNonQuery();
             con.Close();
 
-            return RedirectToPage("List");
+            return RedirectToPage("CategoryList");
         }
     }
 }
