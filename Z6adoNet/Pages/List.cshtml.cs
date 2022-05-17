@@ -43,7 +43,7 @@ namespace Zadanie6.Pages
                       _product.description = reader["Description"].ToString();
                 }
                 _product.price = Decimal.Parse(reader["Price"].ToString());
-                _product.longName = reader["longName"].ToString();
+                
 
                 productList.Add(_product);
             }
