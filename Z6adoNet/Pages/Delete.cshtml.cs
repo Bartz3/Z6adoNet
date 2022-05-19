@@ -21,7 +21,12 @@ namespace Zadanie6.Pages
         }
         public IActionResult OnPost(int id)
         {
-            string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
+            var cookie = Request.Cookies["UserLoginCookie"];
+            if(cookie == null) { return RedirectToPage("Index"); }
+            
+        
+
+        string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
 
             SqlConnection con = new SqlConnection(myCompanyDBcs);
             string sql = "DELETE FROM Product WHERE Id = @Id";

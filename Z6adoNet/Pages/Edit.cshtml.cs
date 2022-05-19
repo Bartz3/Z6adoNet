@@ -22,6 +22,9 @@ namespace Zadanie6.Pages
         }
         public IActionResult OnPost(Product p)
         {
+            var cookie = Request.Cookies["UserLoginCookie"];
+            if (cookie == null) { return RedirectToPage("Index"); }
+
             p.id = editProduct.id;
             p.name = editProduct.name;
             p.price = editProduct.price;

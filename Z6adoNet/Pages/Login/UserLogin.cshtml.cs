@@ -21,6 +21,7 @@ namespace Zadanie6.Pages.Login
         }
         private bool ValidateUser(SiteUser user)
         {
+
             if ((user.userName == "admin") && (user.password == "abc"))
                 return true;
             else
