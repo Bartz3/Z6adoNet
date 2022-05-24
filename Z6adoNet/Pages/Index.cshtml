@@ -2,9 +2,20 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+@*<AuthorizeView>
+    <Authorized>
+        <h1>Hello, @context.SiteUser.Identity.Name!</h1>
+        <p>You can only see this content if you're authenticated.</p>
+    </Authorized>
+    <NotAuthorized>
+        <h1>Authentication Failure!</h1>
+        <p>You're not signed in.</p>
+    </NotAuthorized>
+</AuthorizeView>*@
