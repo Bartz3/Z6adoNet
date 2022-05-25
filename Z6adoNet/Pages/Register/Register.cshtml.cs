@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Security.Cryptography;
 using System.Data.SqlClient;
-using Zadanie6.Models;
+using Zadanie6.Models;  
 
 
 namespace Zadanie6.Pages.Register
@@ -28,30 +31,34 @@ namespace Zadanie6.Pages.Register
         {
             if (user.password == passwd2)
             {
-                //SiteUser siteUser = new SiteUser();
-                //siteUser
+                var hash = SecurePasswordHasher.Hash(user.password);
                 string zad10cs = _configuration.GetConnectionString("MyCompanyDB");
+
                 SqlConnection con = new SqlConnection(zad10cs);
                 SqlCommand cmd = new SqlCommand("sp_userAdd", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlParameter name_SqlParam = new SqlParameter("@userName", SqlDbType.VarChar,
+                100);
+                name_SqlParam.Value = user.userName;
+                cmd.Parameters.Add(name_SqlParam);
 
-                cmd.Parameters.AddWithValue("@password", user.password);
-                cmd.Parameters.AddWithValue("@userName", user.userName);
-                try
-                {
-                    con.Open();
-                    int numAff = cmd.ExecuteNonQuery();
-                    //lblInfoText += string.Format("<br />Deleted <b>{0}</b> record(s)<br />", numAff);
-                }
-                catch (SqlException exc)
-                {
-                    //lblInfoText += string.Format("<b>Error:</b> {0}<br /><br />", exc.Message);
-                }
-                finally { con.Close(); }
-            return RedirectToPage("/Index");
+                SqlParameter password_SqlParam = new SqlParameter("@password", SqlDbType.VarChar,
+                100);
+                password_SqlParam.Value = hash;
+                cmd.Parameters.Add(password_SqlParam);
+
+                SqlParameter productID_SqlParam = new SqlParameter("@Id",
+                SqlDbType.Int);
+                productID_SqlParam.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(productID_SqlParam);
+                con.Open();
+                int numAff = cmd.ExecuteNonQuery();
+                con.Close();
+
+                return RedirectToPage("/Index");
             }
             else return Page();
         }
-
 
 
     }

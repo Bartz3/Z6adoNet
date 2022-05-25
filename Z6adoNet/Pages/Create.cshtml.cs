@@ -26,8 +26,6 @@ namespace Zadanie6.Pages
             p.price = newProduct.price;
             string myCompanyDBcs = _configuration.GetConnectionString("MyCompanyDB");
             SqlConnection con = new SqlConnection(myCompanyDBcs);
-            //string sql = "INSERT INTO Product VALUES(5,'"+p.name+"','"+ p.price.ToString()+"')";
-            // string sql = "INSERT INTO Product (name,price) VALUES('"+p.name+"','"+ p.price.ToString()+"')";
             string sql = "INSERT INTO Product (name,price) VALUES(@name,@price)";
 
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -44,15 +42,6 @@ namespace Zadanie6.Pages
                 //lblInfoText += string.Format("<b>Error:</b> {0}<br /><br />", exc.Message);
             }
             finally { con.Close(); }
-            //using (con)
-            //{
-            //    con.Open();
-            //    SqlCommand cmd = new SqlCommand(sql, con);
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    reader.Close();
-            //    con.Close();
-            //}
-            
 
             return RedirectToPage("List");
         }

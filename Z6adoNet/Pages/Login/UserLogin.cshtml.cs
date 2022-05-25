@@ -49,8 +49,10 @@ namespace Zadanie6.Pages.Login
 
                 string log = String.Concat(User.userName.Where(c => !Char.IsWhiteSpace(c)));
                 string psswd = String.Concat(User.password.Where(c => !Char.IsWhiteSpace(c)));
+                var hash = SecurePasswordHasher.Hash(psswd);
+                var result = SecurePasswordHasher.Verify(psswd, hash);
 
-                if ((UserToValidate.userName ==log ) && (UserToValidate.password == psswd))
+                if ((UserToValidate.userName ==log ) && result)
                 {
                     ViewData["userNick"]=UserToValidate.userName;
                     return true;
